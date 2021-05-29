@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCharFra", "MovieCharFra\MovieCharFra.csproj", "{52E2F5C1-5D7C-42D6-89DD-FEF7F61592E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52E2F5C1-5D7C-42D6-89DD-FEF7F61592E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52E2F5C1-5D7C-42D6-89DD-FEF7F61592E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52E2F5C1-5D7C-42D6-89DD-FEF7F61592E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52E2F5C1-5D7C-42D6-89DD-FEF7F61592E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04899582-BB67-453E-A369-E4C1CBF33D6D}
+	EndGlobalSection
+EndGlobal
