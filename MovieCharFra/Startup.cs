@@ -11,7 +11,9 @@ using Microsoft.OpenApi.Models;
 using MovieCharFra.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MovieCharFra
@@ -32,8 +34,29 @@ namespace MovieCharFra
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MovieCharFra", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MovieCharFra", Version = "v1",
+                    Description = "A simple example ASP.NET Core Web API to track athletes and their coaches. Made with best practices in mind as part of the Noroff Accelerate Fullstack course.",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Noroff Accelerate",
+                        Email = "utdanning@noroff.no",
+                        Url = new Uri("https://www.noroff.no/accelerate"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under MIT",
+                        Url = new Uri("https://opensource.org/licenses/MIT"),
+                    }
+
+                });
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+
             });
+            services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<MovieCharFraDbContext>(
                 opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }

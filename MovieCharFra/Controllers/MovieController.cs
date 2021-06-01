@@ -1,35 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieCharFra.Models;
+using MovieCharFra.Models.DTOs.Movie;
 
 namespace MovieCharFra.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/movie")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
+
     public class MovieController : ControllerBase
     {
         private readonly MovieCharFraDbContext _context;
+        private readonly IMapper _mapper;
 
-        public MovieController(MovieCharFraDbContext context)
+        public MovieController(MovieCharFraDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
-
+        /// <summary>
+        /// Get all the movies in the database
+        /// </summary>
+        /// <returns></returns>
         // GET: api/Movie
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
+        public async Task<ActionResult<IEnumerable<MovieReadDTO>>> GetMovies()
         {
-            return await _context.Movies.ToListAsync();
+            return _mapper.Map<List<MovieReadDTO>>(await _context.Movies.Include(m => m.Characters).Include(m => m.Franchise).ToListAsync());
         }
-
+        /// <summary>
+        /// Get specific movie by its ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/Movie/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Movie>> GetMovie(int id)
+        public async Task<ActionResult<MovieReadDTO>> GetMovie(int id)
         {
             var movie = await _context.Movies.FindAsync(id);
 
@@ -38,20 +54,24 @@ namespace MovieCharFra.Controllers
                 return NotFound();
             }
 
-            return movie;
+            return _mapper.Map <MovieReadDTO> (movie);
         }
 
-        // PUT: api/Movie/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Updates a movie.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="movie"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMovie(int id, Movie movie)
+        public async Task<IActionResult> PutMovie(int id, MovieEditDTO movie)
         {
             if (id != movie.Id)
             {
                 return BadRequest();
             }
-
-            _context.Entry(movie).State = EntityState.Modified;
+            Movie domainMovie = _mapper.Map<Movie>(movie);
+            _context.Entry(domainMovie).State = EntityState.Modified;
 
             try
             {
@@ -72,8 +92,11 @@ namespace MovieCharFra.Controllers
             return NoContent();
         }
 
-        // POST: api/Movie
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        ///  Adds a new movie to the database.
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Movie>> PostMovie(Movie movie)
         {
@@ -83,7 +106,11 @@ namespace MovieCharFra.Controllers
             return CreatedAtAction("GetMovie", new { id = movie.Id }, movie);
         }
 
-        // DELETE: api/Movie/5
+        /// <summary>
+        /// Deletes a movie.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMovie(int id)
         {
@@ -104,10 +131,10 @@ namespace MovieCharFra.Controllers
             return _context.Movies.Any(e => e.Id == id);
         }
 
-        // 1. Get certifications for coach
-        // 2. Add certifications to coach
-        // 3. Update existing certifications for coach
-        [HttpGet("{id}/Characters")]
+        // 1. Get characters for movie
+        // 2. Add characters to movie
+        // 3. Update existing characters for movie
+        /*[HttpGet("{id}/Characters")]
         public async Task<ActionResult<IEnumerable<Character>>> GetCharsForMovie(int id)
         {
             Movie Movie = await _context.Movies.Include(c => c.Characters).Where(c => c.Id == id).FirstOrDefaultAsync();
@@ -168,7 +195,7 @@ namespace MovieCharFra.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }*/
 
     }
 }

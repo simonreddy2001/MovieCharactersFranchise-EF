@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MovieCharFra</name>
+    </assembly>
+    <members>
+        <member name="M:MovieCharFra.Controllers.CharacterController.GetCharacters">
+            <summary>
+            Get all the characters in the database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.CharacterController.GetCharacter(System.Int32)">
+            <summary>
+            Get specific character by their ID.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.CharacterController.PutCharacter(System.Int32,MovieCharFra.Models.DTOs.Character.CharacterEditDTO)">
+            <summary>
+            Updates a character
+            </summary>
+            <param name="id"></param>
+            <param name="character"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.CharacterController.PostCharacter(MovieCharFra.Models.Character)">
+            <summary>
+            Adds a new character to the database.
+            </summary>
+            <param name="character"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.CharacterController.DeleteCharacter(System.Int32)">
+            <summary>
+            Deletes a character
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.FranchiseController.GetFranchises">
+            <summary>
+            Get all the franchises in the database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.FranchiseController.GetFranchise(System.Int32)">
+            <summary>
+            Get specific franchise by its ID.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.FranchiseController.PutFranchise(System.Int32,MovieCharFra.Models.DTOs.Franchise.FranchiseEditDTO)">
+            <summary>
+            Updates a franchise
+            </summary>
+            <param name="id"></param>
+            <param name="franchise"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.FranchiseController.PostFranchise(MovieCharFra.Models.Franchise)">
+            <summary>
+            Adds a new franchise to the database
+            </summary>
+            <param name="franchise"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.FranchiseController.DeleteFranchise(System.Int32)">
+            <summary>
+            Deletes a franchise
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.MovieController.GetMovies">
+            <summary>
+            Get all the movies in the database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.MovieController.GetMovie(System.Int32)">
+            <summary>
+            Get specific movie by its ID.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.MovieController.PutMovie(System.Int32,MovieCharFra.Models.DTOs.Movie.MovieEditDTO)">
+            <summary>
+            Updates a movie.
+            </summary>
+            <param name="id"></param>
+            <param name="movie"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.MovieController.PostMovie(MovieCharFra.Models.Movie)">
+            <summary>
+             Adds a new movie to the database.
+            </summary>
+            <param name="movie"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.MovieController.DeleteMovie(System.Int32)">
+            <summary>
+            Deletes a movie.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
