@@ -64,14 +64,14 @@ namespace MovieCharFra.Controllers
         /// <param name="movie"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMovie(int id, Movie movie)
+        public async Task<IActionResult> PutMovie(int id, MovieEditDTO movie)
         {
             if (id != movie.Id)
             {
                 return BadRequest();
             }
-            //Movie domainMovie = _mapper.Map<Movie>(movie);
-            _context.Entry(movie).State = EntityState.Modified;
+            Movie domainMovie = _mapper.Map<Movie>(movie);
+            _context.Entry(domainMovie).State = EntityState.Modified;
 
             try
             {

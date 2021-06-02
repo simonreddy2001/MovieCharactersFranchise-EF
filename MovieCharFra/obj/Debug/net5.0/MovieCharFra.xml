@@ -117,7 +117,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:MovieCharFra.Controllers.MovieController.PutMovie(System.Int32,MovieCharFra.Models.Movie)">
+        <member name="M:MovieCharFra.Controllers.MovieController.PutMovie(System.Int32,MovieCharFra.Models.DTOs.Movie.MovieEditDTO)">
             <summary>
             Updates a movie.
             </summary>

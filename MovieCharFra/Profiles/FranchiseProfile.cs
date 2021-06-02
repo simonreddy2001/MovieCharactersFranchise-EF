@@ -24,8 +24,6 @@ namespace MovieCharFra.Profiles
                 .ReverseMap();
             // Franchise<->FranchiseEditDTO
             CreateMap<Franchise, FranchiseEditDTO>()
-                 .ForMember(cdto => cdto.Movies, opt => opt
-                .MapFrom(c => c.Movies.Select(c => c.Id).ToList()))
                  .ReverseMap(); ;
         }
 

@@ -18,8 +18,6 @@ namespace MovieCharFra.Models.DTOs.Movie
 
         public string Trailer { get; set; }
 
-        public List<int> Characters { get; set; }
-
-        public int Franchise { get; set; }
+        public int FranchiseId { get; set; }
     }
 }

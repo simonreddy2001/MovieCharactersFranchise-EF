@@ -220,7 +220,7 @@ namespace MovieCharFra.Controllers
         public async Task<ActionResult<IEnumerable<Franchise>>> GetCharactersForFranchise(int id)
         {
             var FranchiseChar = await _context.Franchises.Include(f => f.Movies)
-                .ThenInclude(m=>m.Characters)
+                .ThenInclude(m=>m.Characters).ThenInclude(mc=>mc.Id)
                 .Where(c => c.Id == id).ToListAsync();
             if (FranchiseChar == null)
             {

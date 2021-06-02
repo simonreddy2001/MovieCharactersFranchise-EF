@@ -16,6 +16,5 @@ namespace MovieCharFra.Models.DTOs.Character
 
         public string Trailer { get; set; }
 
-        public List<int> Movies { get; set; }
     }
 }
