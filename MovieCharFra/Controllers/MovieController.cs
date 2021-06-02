@@ -64,14 +64,14 @@ namespace MovieCharFra.Controllers
         /// <param name="movie"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMovie(int id, MovieEditDTO movie)
+        public async Task<IActionResult> PutMovie(int id, Movie movie)
         {
             if (id != movie.Id)
             {
                 return BadRequest();
             }
-            Movie domainMovie = _mapper.Map<Movie>(movie);
-            _context.Entry(domainMovie).State = EntityState.Modified;
+            //Movie domainMovie = _mapper.Map<Movie>(movie);
+            _context.Entry(movie).State = EntityState.Modified;
 
             try
             {
@@ -131,10 +131,12 @@ namespace MovieCharFra.Controllers
             return _context.Movies.Any(e => e.Id == id);
         }
 
-        // 1. Get characters for movie
-        // 2. Add characters to movie
-        // 3. Update existing characters for movie
-        /*[HttpGet("{id}/Characters")]
+        /// <summary>
+        /// Get only characters for movie
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}/Characters")]
         public async Task<ActionResult<IEnumerable<Character>>> GetCharsForMovie(int id)
         {
             Movie Movie = await _context.Movies.Include(c => c.Characters).Where(c => c.Id == id).FirstOrDefaultAsync();
@@ -150,6 +152,12 @@ namespace MovieCharFra.Controllers
             return Movie.Characters.ToList();
         }
 
+        /// <summary>
+        /// Add only characters to a movie
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Characters"></param>
+        /// <returns></returns>
         [HttpPost("{id}/Characters")]
         public async Task<IActionResult> AddCharsToMovie(int id, List<int> Characters)
         {
@@ -175,8 +183,14 @@ namespace MovieCharFra.Controllers
 
             return NoContent();
         }
-        [HttpPut("{id}/Characters")]
-        public async Task<IActionResult> UpdateCharsForMovie(int id, List<int> Characters)
+        /// <summary>
+        /// Delete given characters for movie
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Characters"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}/Characters")]
+        public async Task<IActionResult> DeleteCharsForMovie(int id, List<int> Characters)
         {
             Movie movie = await _context.Movies.Include(c => c.Characters).FirstOrDefaultAsync(c => c.Id == id);
             if (movie == null)
@@ -184,18 +198,19 @@ namespace MovieCharFra.Controllers
                 return NotFound();
             }
 
-            movie.Characters.Clear();
+            //movie.Characters.Clear();
 
             foreach (int charid in Characters)
             {
                 Character chara = await _context.Characters.FindAsync(charid);
-                movie.Characters.Add(chara);
+                movie.Characters.Remove(chara);
+                
             }
 
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }*/
+        }
 
     }
 }

@@ -74,6 +74,36 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:MovieCharFra.Controllers.FranchiseController.GetMoviesForFranchise(System.Int32)">
+            <summary>
+            Get only movies in a franchise
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.FranchiseController.AddMoviesToFranchise(System.Int32,System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Add only movies to a franchise
+            </summary>
+            <param name="id"></param>
+            <param name="Movies"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.FranchiseController.UpdateMoviesForFranchise(System.Int32,System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete given movies for franchise
+            </summary>
+            <param name="id"></param>
+            <param name="Movies"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.FranchiseController.GetCharactersForFranchise(System.Int32)">
+            <summary>
+            Get all characters by their franchise
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:MovieCharFra.Controllers.MovieController.GetMovies">
             <summary>
             Get all the movies in the database
@@ -87,7 +117,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:MovieCharFra.Controllers.MovieController.PutMovie(System.Int32,MovieCharFra.Models.DTOs.Movie.MovieEditDTO)">
+        <member name="M:MovieCharFra.Controllers.MovieController.PutMovie(System.Int32,MovieCharFra.Models.Movie)">
             <summary>
             Updates a movie.
             </summary>
@@ -107,6 +137,29 @@
             Deletes a movie.
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.MovieController.GetCharsForMovie(System.Int32)">
+            <summary>
+            Get only characters for movie
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.MovieController.AddCharsToMovie(System.Int32,System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Add only characters to a movie
+            </summary>
+            <param name="id"></param>
+            <param name="Characters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MovieCharFra.Controllers.MovieController.DeleteCharsForMovie(System.Int32,System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete given characters for movie
+            </summary>
+            <param name="id"></param>
+            <param name="Characters"></param>
             <returns></returns>
         </member>
     </members>

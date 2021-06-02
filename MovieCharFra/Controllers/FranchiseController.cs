@@ -132,5 +132,102 @@ namespace MovieCharFra.Controllers
         {
             return _context.Franchises.Any(e => e.Id == id);
         }
+
+        /// <summary>
+        /// Get only movies in a franchise
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}/Movies")]
+        public async Task<ActionResult<IEnumerable<Movie>>> GetMoviesForFranchise(int id)
+        {
+            Franchise Franchise = await _context.Franchises.Include(f => f.Movies).Where(f => f.Id == id).FirstOrDefaultAsync();
+            if (Franchise == null)
+            {
+                return NotFound();
+            }
+            foreach (Movie Movie in Franchise.Movies)
+            {
+                Movie.Franchise = null;
+            }
+
+            return Franchise.Movies.ToList();
+        }
+
+        /// <summary>
+        /// Add only movies to a franchise
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Movies"></param>
+        /// <returns></returns>
+        [HttpPost("{id}/Movies")]
+        public async Task<IActionResult> AddMoviesToFranchise(int id, List<int> Movies)
+        {
+            Franchise Franchise = await _context.Franchises.Include(c => c.Movies).FirstOrDefaultAsync(c => c.Id == id);
+            if (Franchise == null)
+            {
+                return NotFound();
+            }
+
+            foreach (int movieid in Movies)
+            {
+                if (Franchise.Movies.FirstOrDefault(c => c.Id == movieid) == null)
+                {
+                    Movie mov = await _context.Movies.FindAsync(movieid);
+                    if (mov != null)
+                    {
+                        Franchise.Movies.Add(mov);
+                    }
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+        /// <summary>
+        /// Delete given movies for franchise
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Movies"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}/Movies")]
+        public async Task<IActionResult> UpdateMoviesForFranchise(int id, List<int> Movies)
+        {
+            Franchise Franchise = await _context.Franchises.Include(c => c.Movies).FirstOrDefaultAsync(c => c.Id == id);
+            if (Franchise == null)
+            {
+                return NotFound();
+            }
+
+            foreach (int movieid in Movies)
+            {
+                Movie mov = await _context.Movies.FindAsync(movieid);
+                Franchise.Movies.Remove(mov);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Get all characters by their franchise
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}/Characters")]
+        public async Task<ActionResult<IEnumerable<Franchise>>> GetCharactersForFranchise(int id)
+        {
+            var FranchiseChar = await _context.Franchises.Include(f => f.Movies)
+                .ThenInclude(m=>m.Characters)
+                .Where(c => c.Id == id).ToListAsync();
+            if (FranchiseChar == null)
+            {
+                return NotFound();
+            }
+
+            return FranchiseChar.ToList();
+        }
     }
 }
